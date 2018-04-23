@@ -3,7 +3,7 @@ external reactClass : ReasonReact.reactClass = "ToolbarContent";
 
 let make =
     (
-      ~dark: bool=false,
+      ~dark: option(bool)=?,
       ~title: option(string),
       ~titleStyle: option(Js.t({..}))=?,
       ~subtitle: option(string)=?,
@@ -18,7 +18,7 @@ let make =
     ~props=
       Js.Null_undefined.(
         {
-          "dark": Js.Boolean.to_js_boolean(dark),
+          "dark": from_opt(dark),
           "onPress": from_opt(onPress),
           "title": from_opt(title),
           "titleStyle": from_opt(titleStyle),
