@@ -3,22 +3,22 @@ external reactClass : ReasonReact.reactClass = "Toolbar";
 
 let make =
     (
-      ~dark: bool=false,
+      ~dark: option(bool)=?,
       ~statusBarHeight: option(float)=?,
       ~theme: option(Js.t({..}))=?,
       ~style: option(BsReactNative.Style.t)=?,
-      children
+      children,
     ) =>
   ReasonReact.wrapJsForReason(
     ~reactClass,
     ~props=
       Js.Null_undefined.(
         {
-          "dark": Js.Boolean.to_js_boolean(dark),
+          "dark": from_opt(dark),
           "statusBarHeight": from_opt(statusBarHeight),
           "theme": from_opt(theme),
-          "style": from_opt(style)
+          "style": from_opt(style),
         }
       ),
-    children
+    children,
   );
