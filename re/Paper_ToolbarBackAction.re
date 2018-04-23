@@ -3,7 +3,7 @@ external reactClass : ReasonReact.reactClass = "ToolbarBackAction";
 
 let make =
     (
-      ~dark: bool=false,
+      ~dark: option(bool)=?,
       ~style: option(BsReactNative.Style.t)=?,
       ~onPress: option(BsReactNative.RNEvent.NativeEvent.t => unit)=?,
       children
@@ -13,7 +13,7 @@ let make =
     ~props=
       Js.Null_undefined.(
         {
-          "dark": Js.Boolean.to_js_boolean(dark),
+          "dark": from_opt(dark),
           "onPress": from_opt(onPress),
           "style": from_opt(style)
         }
